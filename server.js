@@ -28,4 +28,4 @@ app.get("/api/notes", (req, res) => {
 // App Listener
 app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
-  });
+  })
