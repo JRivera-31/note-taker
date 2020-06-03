@@ -1,14 +1,18 @@
+// Require packages
 const express = require("express")
 const path = require("path")
 const fs = require("fs")
 
+// Create Server
 const app = express()
-const PORT = 8080
+// Dynamic porting
+const PORT = process.env.PORT || 8080
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'))
 
+// To store notes
 const notes = []
 
 // Create Routes
@@ -23,7 +27,7 @@ app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "/public/notes.html"))
 })
 
-// Display notes
+// Display all notes
 app.get("/api/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "db/db.json"))
 })
@@ -74,6 +78,7 @@ app.delete("/api/notes/:id", (req, res) => {
         
     })
 
+    // Send array
     res.json(notes)
 })
 
