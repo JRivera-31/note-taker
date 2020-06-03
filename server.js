@@ -33,9 +33,8 @@ app.post("/api/notes", (req, res) => {
     // Assign the note to variable
     let newNote = req.body
 
-    newNote.id = Math.floor(Math.random())
-
-    console.log(newNote.id)
+    // Add id to note
+    newNote.id = notes.length
 
     // Push it to the notes array
     notes.push(newNote)
@@ -54,10 +53,28 @@ app.post("/api/notes", (req, res) => {
 })
 
 // Delete notes from the db
-app.delete("/api/notes/:notes", (req, res) => {
-    const noteID = req.params.notes
-    const removed = notes.splice(notes, noteID)
-    res.json(removed)
+app.delete("/api/notes/:id", (req, res) => {
+    // Get the note ID
+    const noteID = parseInt(req.params.id)
+    console.log(noteID)
+
+    // Remove selected note
+    notes.splice(noteID, 1)
+
+    // Reassign IDs
+    for (let i = 0; i < notes.length; i++) {
+        notes[i].id = i
+    }
+
+    // Write new array to the db
+    fs.writeFile("db/db.json", JSON.stringify(notes, null, 2), err => {
+        if (err) throw err
+
+        console.log("Note has been deleted..")
+        
+    })
+
+    res.json(notes)
 })
 
 
