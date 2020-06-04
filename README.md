@@ -21,7 +21,7 @@ https://immense-crag-56141.herokuapp.com/
 
 ## Installation:
 
-**How to install the project:** Clone from this repository. Open in your text editor and run: (Must have Node.js installed
+**How to install the project:** Clone from this repository. Open in your text editor and run: (Must have Node.js installed)
 
 ```
 npm install
